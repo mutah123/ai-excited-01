@@ -10,6 +10,8 @@ A giant pink axolotl bursts out of a shattered glass fishbowl on a wooden desk â
 
 This is version 2 of the entry. The v1 image scored 95.18% in the dev phase; v2 makes the axolotl more awe-inspiring instead of cute, shatters the bowl properly so the breakout reads, cools and simplifies the background, brings the child fully into frame, and crops tighter so the axolotl fills about 70% of the frame. The axolotl stays the creature â€” it appears in none of the other entries' titles on the board, so the surprise stays fresh against anyone.
 
+Round 3 fixes the program so it runs from any working directory: the entry image is resolved from the script file itself, not from the current directory. (Round 2 was rejected because the program copied `./entry.png` relative to the working directory; the grader runs it from elsewhere.)
+
 ## How it works
 
 `main.ts` (Node 22, standard library only) copies the entry image to `/output/entry.png`:
