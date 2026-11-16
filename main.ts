@@ -1,19 +1,20 @@
-// Axolotl Out of the Fishbowl — make.fun ai-excited-01 entry (Node 22, standard library only).
-// The entry image is the entry.png beside this file; the program copies it to
-// /output/entry.png, where the judge reads it. Nothing else is written.
-//
-// Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
-//   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
-
+// Axolotl Out of the Fishbowl v2 — make.fun ai-excited-01 entry.
+// Runs on Node 22 with the standard library only. It takes the generated
+// image entry.png from this directory and places it at
+// $MAKEFUN_OUTPUT_DIR/entry.png (default /output), where the judge reads it.
+// v2 rebuilds the image from scratch: same axolotl, more awe, a bowl that
+// is properly shattered, and a tighter crop.
 import { copyFileSync, mkdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
-const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
-mkdirSync(outDir, { recursive: true });
-const dest = join(outDir, 'entry.png');
-copyFileSync(new URL('./entry.png', import.meta.url), dest);
+const outputDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
+const destination = join(outputDir, 'entry.png');
 
-// Confirm the copy landed whole before the grader reads it.
-const { size } = statSync(dest);
-if (size === 0) throw new Error('entry.png copy came out empty');
-console.log(`wrote ${dest} (${size} bytes)`);
+mkdirSync(outputDir, { recursive: true });
+copyFileSync('./entry.png', destination);
+
+const size = statSync(destination).size;
+if (size === 0) {
+  throw new Error('entry.png copy came out empty');
+}
+console.log(`wrote ${destination} (${size} bytes)`);
